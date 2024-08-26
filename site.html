@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vamos Jogar?</title>
+  <style>
+    body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #9032bb; 
+      }
+  
+      #pergunta {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+  
+      .botao {
+        padding: 10px 20px;
+        border: 2px solid black;
+        margin: 0 10px;
+        cursor: pointer;
+      }
+  
+      #nao {
+        position: relative;
+        transform: translateZ(0); /* Adicione esta linha */
+    }
+  
+      #resposta {
+        margin-top: 20px;
+        display: none;
+      }
+  </style>
+</head>
+<body>
+  <div id="pergunta">Quer me dar um beijin na boca?</div>
+
+  <div>
+    <button class="botao" id="sim">Sim</button>
+    <button class="botao" id="nao">Não</button>
+  </div>
+
+  <div id="resposta">Uii que safada 🤤🤤</div>
+
+  <audio id="audio" src="bill.mp3"></audio>
+
+  <script>
+    const botaoNao = document.getElementById('nao');
+    const resposta = document.getElementById('resposta');
+    const audio = document.getElementById('audio');
+
+    botaoNao.addEventListener('mousemove', () => {
+        setTimeout(() => { // Adicione esta linha
+          // Define a área de movimento (ajuste os valores conforme desejado)
+          const areaLargura = 300; 
+          const areaAltura = 150; 
+      
+          // Calcula a posição máxima para o botão dentro da área
+          const maxX = window.innerWidth - areaLargura - botaoNao.offsetWidth;
+          const maxY = window.innerHeight - areaAltura - botaoNao.offsetHeight;
+      
+          // Gera coordenadas aleatórias dentro dos limites calculados
+          const randomX = Math.max(0, Math.floor(Math.random() * maxX));
+          const randomY = Math.max(0, Math.floor(Math.random() * maxY));
+      
+          botaoNao.style.left = randomX + 'px';
+          botaoNao.style.top = randomY + 'px';
+        }, 10); // Atraso de 10 milissegundos
+      });
+
+    document.getElementById('sim').addEventListener('click', () => {
+      resposta.style.display = 'block';
+      audio.play();
+    });
+  </script>
+</body>
+</html>
